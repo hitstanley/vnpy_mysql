@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 
 from peewee import (
-    AutoField,
+    BigAutoField,
     CharField,
     DateTimeField,
     FloatField, IntegerField,
@@ -46,7 +46,7 @@ class DateTimeMillisecondField(DateTimeField):
 class DbBarData(Model):
     """K线数据表映射对象"""
 
-    id: AutoField = AutoField()
+    id: BigAutoField = BigAutoField()
 
     symbol: str = CharField()
     exchange: str = CharField()
@@ -69,7 +69,7 @@ class DbBarData(Model):
 class DbTickData(Model):
     """TICK数据表映射对象"""
 
-    id: AutoField = AutoField()
+    id: BigAutoField = BigAutoField()
 
     symbol: str = CharField()
     exchange: str = CharField()
@@ -123,7 +123,7 @@ class DbTickData(Model):
 class DbBarOverview(Model):
     """K线汇总数据表映射对象"""
 
-    id: AutoField = AutoField()
+    id: BigAutoField = BigAutoField()
 
     symbol: str = CharField()
     exchange: str = CharField()
@@ -160,7 +160,7 @@ class MysqlDatabase(BaseDatabase):
         """"""
         self.db: PeeweeMySQLDatabase = db
         self.db.connect()
-        self.db.create_tables([DbBarData, DbTickData, DbBarOverview, DbTickOverview])
+        self.db.create_tables([DbBarData, DbTickData, DbBarOverview, DbTickOverview], safe=False)
 
     def save_bar_data(self, bars: List[BarData], stream: bool = False) -> bool:
         """保存K线数据"""
