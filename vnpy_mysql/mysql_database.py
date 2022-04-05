@@ -60,6 +60,7 @@ class DbBarData(Model):
     high_price: float = FloatField()
     low_price: float = FloatField()
     close_price: float = FloatField()
+    adj_factor: float = FloatField()
 
     class Meta:
         database: PeeweeMySQLDatabase = db
