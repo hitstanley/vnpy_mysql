@@ -154,6 +154,74 @@ class DbTickOverview(Model):
         indexes: tuple = ((("symbol", "exchange"), True),)
 
 
+class BarMixFactor(Model):
+    """混合的因子。包含PE/PB/量比/换手/流入/内外盘等"""
+    id = BigAutoField()
+
+    symbol: str = CharField()
+    exchange: str = CharField()
+    datetime: datetime = DateTimeField()
+
+    buy_sm_vol: int = IntegerField()
+    buy_sm_amount: float = FloatField()
+    sell_sm_vol: int = IntegerField()
+    sell_sm_amount: float = FloatField()
+
+    buy_md_vol: int = IntegerField()
+    buy_md_amount: float = FloatField()
+    sell_md_vol: int = IntegerField()
+    sell_md_amount: float = FloatField()
+
+    buy_lg_vol: int = IntegerField()
+    buy_lg_amount: float = FloatField()
+
+    sell_lg_vol: int = IntegerField()
+    sell_lg_amount: float = FloatField()
+    buy_elg_vol: int = IntegerField()
+    buy_elg_amount: float = FloatField()
+    sell_elg_vol: int = IntegerField()
+    sell_elg_amount: float = FloatField()
+
+    net_mf_vol: int = IntegerField()
+    net_mf_amount: float = FloatField()
+
+    vol_ratio: float = FloatField()
+    turn_over: float = FloatField()
+
+    name: str = CharField()
+
+    pct_change: float = FloatField()
+    change: float = FloatField()
+
+    swing: float = FloatField()
+
+    selling: float = FloatField()
+    buying: float = FloatField()
+
+    total_share: float = FloatField()
+    float_share: float = FloatField()
+    pe: float = FloatField()
+
+    industry: str = CharField()
+    area: str = CharField()
+
+    float_mv: float = FloatField()
+    total_mv: float = FloatField()
+    avg_price: float = FloatField()
+    strength: float = FloatField()
+    activity: float = FloatField()
+
+    avg_turnover: float = FloatField()
+    attack: float = FloatField()
+
+    interval_3: float = FloatField()
+    interval_6: float = FloatField()
+
+    class Meta:
+        database = db
+        indexes = ((("symbol", "exchange", "datetime"), True),)
+
+
 class MysqlDatabase(BaseDatabase):
     """Mysql数据库接口"""
 
