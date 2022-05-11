@@ -55,12 +55,14 @@ class DbBarData(Model):
 
     volume: float = FloatField()
     turnover: float = FloatField()
+    take_buy_volume: float = FloatField()
     open_interest: float = FloatField()
     open_price: float = FloatField()
     high_price: float = FloatField()
     low_price: float = FloatField()
     close_price: float = FloatField()
     adj_factor: float = FloatField()
+    num_of_trades: int = IntegerField()
 
     class Meta:
         database: PeeweeMySQLDatabase = db
@@ -374,12 +376,15 @@ class MysqlDatabase(BaseDatabase):
                 datetime=datetime.fromtimestamp(db_bar.datetime.timestamp(), DB_TZ),
                 interval=Interval(db_bar.interval),
                 volume=db_bar.volume,
+                take_buy_volume=db_bar.take_buy_volume,
                 turnover=db_bar.turnover,
                 open_interest=db_bar.open_interest,
                 open_price=db_bar.open_price,
                 high_price=db_bar.high_price,
                 low_price=db_bar.low_price,
                 close_price=db_bar.close_price,
+                num_of_trades=db_bar.num_of_trades,
+                adj_factor=db_bar.adj_factor,
                 gateway_name="DB"
             )
             bars.append(bar)
